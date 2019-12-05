@@ -1,0 +1,12 @@
+struct wiringPiNodeStruct * wiringPiNewNode(int pinBase, int numPins) {
+    void *fptr;
+    struct wiringPiNodeStruct *retval;
+
+    fptr = dlsym(_ChwiringPi_handle, "wiringPiNewNode_chdl");
+    if(fptr == NULL) {
+        fprintf(_stderr, "Error: %s(): dlsym(): %s\n", __func__,  dlerror());
+        return NULL;
+    }
+    dlrunfun(fptr, &retval, wiringPiNewNode, pinBase, numPins);
+    return retval;
+}

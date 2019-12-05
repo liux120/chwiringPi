@@ -1,0 +1,10 @@
+void ds1302trickleCharge(int diodes, int resistors) {
+    void *fptr;
+
+    fptr = dlsym(_ChwiringPi_handle, "ds1302trickleCharge_chdl");
+    if(fptr == NULL) {
+        fprintf(_stderr, "Error: %s(): dlsym(): %s\n", __func__,  dlerror());
+        return;
+    }
+    dlrunfun(fptr, NULL, ds1302trickleCharge, diodes, resistors);
+}

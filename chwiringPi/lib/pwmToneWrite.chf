@@ -1,0 +1,10 @@
+void pwmToneWrite(int pin, int freq) {
+    void *fptr;
+
+    fptr = dlsym(_ChwiringPi_handle, "pwmToneWrite_chdl");
+    if(fptr == NULL) {
+        fprintf(_stderr, "Error: %s(): dlsym(): %s\n", __func__,  dlerror());
+        return;
+    }
+    dlrunfun(fptr, NULL, pwmToneWrite, pin, freq);
+}

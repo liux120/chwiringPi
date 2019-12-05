@@ -1,0 +1,10 @@
+void delay(unsigned int howLong) {
+    void *fptr;
+
+    fptr = dlsym(_ChwiringPi_handle, "delay_chdl");
+    if(fptr == NULL) {
+        fprintf(_stderr, "Error: %s(): dlsym(): %s\n", __func__,  dlerror());
+        return;
+    }
+    dlrunfun(fptr, NULL, delay, howLong);
+}

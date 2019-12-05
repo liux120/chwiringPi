@@ -1,0 +1,12 @@
+int wiringPiI2CWrite(int fd, int data) {
+    void *fptr;
+    int retval;
+
+    fptr = dlsym(_ChwiringPi_handle, "wiringPiI2CWrite_chdl");
+    if(fptr == NULL) {
+        fprintf(_stderr, "Error: %s(): dlsym(): %s\n", __func__,  dlerror());
+        return -1;
+    }
+    dlrunfun(fptr, &retval, wiringPiI2CWrite, fd, data);
+    return retval;
+}

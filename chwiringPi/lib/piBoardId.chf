@@ -1,0 +1,10 @@
+void piBoardId(int *model, int *rev, int *mem, int *maker, int *overVolted) {
+    void *fptr;
+
+    fptr = dlsym(_ChwiringPi_handle, "piBoardId_chdl");
+    if(fptr == NULL) {
+        fprintf(_stderr, "Error: %s(): dlsym(): %s\n", __func__,  dlerror());
+        return;
+    }
+    dlrunfun(fptr, NULL, piBoardId, model, rev, mem, maker, overVolted);
+}

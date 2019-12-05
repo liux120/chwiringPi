@@ -1,0 +1,12 @@
+unsigned int ds1302rtcRead(int reg) {
+    void *fptr;
+    unsigned int retval;
+
+    fptr = dlsym(_ChwiringPi_handle, "ds1302rtcRead_chdl");
+    if(fptr == NULL) {
+        fprintf(_stderr, "Error: %s(): dlsym(): %s\n", __func__,  dlerror());
+        return -1;
+    }
+    dlrunfun(fptr, &retval, ds1302rtcRead, reg);
+    return retval;
+}

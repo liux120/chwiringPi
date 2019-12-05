@@ -1,0 +1,12 @@
+int wiringPiI2CReadReg8(int fd, int reg) {
+    void *fptr;
+    int retval;
+
+    fptr = dlsym(_ChwiringPi_handle, "wiringPiI2CReadReg8_chdl");
+    if(fptr == NULL) {
+        fprintf(_stderr, "Error: %s(): dlsym(): %s\n", __func__,  dlerror());
+        return -1;
+    }
+    dlrunfun(fptr, &retval, wiringPiI2CReadReg8, fd, reg);
+    return retval;
+}
